@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    orders
+{% endblock title %}
+
+{% block content %}
+
+<ul class="list-group">
+{% for order in orders %}
+  <li class="list-group-item">{{order.item.name}} - for {{order.user.first_name}} {{order.user.last_name}}</li>
+{% endfor %}
+</ul>
+
+{% endblock content %}

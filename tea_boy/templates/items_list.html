@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     menu
@@ -10,18 +11,26 @@
 
 		{% for item in items %}
 			<div class="col-12 col-sm-6 col-md-4">
-				<div class="card my-3">
+				<div class="card my-4">
 					<div class="card-body text-center">
-						{% if item.pic %}
-							<img src="{{item.pic.url}}" class="card-img-top items_pic my-3" alt="{{restaurant.logo}} logo">
+						{% if item.image %}
+							<img src="{{item.image.url}}" alt="{{item.name}}">
+						{% else %}
+							<p><img src="{% static 'images/coffee.png' %}" alt="{{item.name}}"></p>
 						{% endif %}
+						<h5 class="items-list">{{item.name}}</h5>
 						<hr>
-						<h5 class="card-title">{{item.name}}</h5>
-						
-
-
-						<hr>
-						{% comment %} <a href="{% url 'item-detail' item.id %}" class="btn btn-outline-secondary mx-3">Detail</a> {% endcomment %}
+						<div class="col-12">
+							<div class="row">
+								<div class="col-12">
+									<form action="{% url 'order-create' %}" method="POST">
+										{% csrf_token %}
+										<input type="text" name="item-name" value="{{item.name}}" hidden>
+										<input type="submit" class="btn btn-primary block" value="Order Now" style="background-color: #20c997; border-color: #20c997">
+									</form>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

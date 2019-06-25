@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Item(models.Model):
 
@@ -13,6 +14,7 @@ class Item(models.Model):
         null = True, 
         blank = True
         )
+    image = models.ImageField(null = True, blank = True)
     is_active = models.BooleanField(default = True)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
@@ -20,3 +22,12 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Order(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name= "orders")
+    item = models.OneToOneField(Item, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "1 %s - for %s %s" % (self.item.name, self.user.first_name, self.user.last_name)

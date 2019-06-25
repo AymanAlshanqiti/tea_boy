@@ -22,7 +22,10 @@ from tea_boy import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('items/', views.items_list, name='items-list'),
+    path('orders/', views.order_create, name='order-create'),
 ]
 
 urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
