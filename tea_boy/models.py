@@ -26,8 +26,10 @@ class Item(models.Model):
 
 class Order(models.Model):
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name= "orders")
-    item = models.OneToOneField(Item, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
 
     def __str__(self):
         return "1 %s - for %s %s" % (self.item.name, self.user.first_name, self.user.last_name)

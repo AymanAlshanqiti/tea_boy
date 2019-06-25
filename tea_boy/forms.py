@@ -1,2 +1,6 @@
 from django import forms
-form .models import User
+from django.contrib.auth.models import User
+
+class UserLogin(forms.Form):
+    username = forms.CharField(required=True)
+    password = forms.CharField(required=True, widget=forms.PasswordInput())

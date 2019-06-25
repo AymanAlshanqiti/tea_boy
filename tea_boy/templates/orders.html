@@ -6,9 +6,18 @@
 
 {% block content %}
 
+<a href="{% url 'items-list' %}" class="btn btn-info mb-4">Back to Menu</a>
 <ul class="list-group">
 {% for order in orders %}
-  <li class="list-group-item">{{order.item.name}} - for {{order.user.first_name}} {{order.user.last_name}}</li>
+  <li class="list-group-item">
+    <span>
+        {{order.id}} &nbsp&nbsp <b>{{order.item.name}}</b> - for {{order.user.first_name}} {{order.user.last_name}} 
+    </span>
+
+    <span style="float: right">
+        {{order.created_at|date:"d M Y - h:i A"}}
+    </span>
+  </li>
 {% endfor %}
 </ul>
 
