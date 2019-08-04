@@ -9,20 +9,20 @@
 <a href="{% url 'items-list' %}" class="btn btn-info mb-4">Back to Menu</a>
 <ul class="list-group">
 {% for order in orders %}
-  <div class="row justify-content-center">
+  <div class="row justify-content-center mt-3">
     <div class="col-11 col-md-12">
-      <li class="list-group-item" style="padding: 20px;">
-        <span class="col-3">
-          NO.{{order.id}} &nbsp&nbsp <b>1 {{order.item.name}}</b> - for {{order.user.first_name}} {{order.user.last_name}} 
-        </span>
-        
-        <span class="col-4">
-          {{order.created_at|date:"d M - h:i A"}}
-        </span>
-        
-        <span class="col-1" style="float: right">
+      <li class="list-group-item" style="padding: 20px; display: flex; justify-content: flex-start; align-items: center;">
+          <span class="col-sm-12 mt-2 col-md-6">
+            ON.{{order.id}} &nbsp&nbsp <b>1 {{order.item.name}}</b> - for {{order.user.first_name}} {{order.user.last_name}} 
+          </span>
+          
+          <span class="col-sm-12 mt-2 col-md-4">
+            {{order.created_at|date:"d M - h:i A"}}
+          </span>
+          
+          <span class="col-sm-12 mt-2 col-md-1" style="float: right;">
             <a class="btn btn-danger" href="{% url 'order-delete' order.id %}">Delate</a>
-        </span>
+          </span>
       </li>
     </div>
   </div>
