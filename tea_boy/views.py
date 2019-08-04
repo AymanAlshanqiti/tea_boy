@@ -17,8 +17,15 @@ def items_list(request):
     return render(request, 'items_list.html', context)
 
 
-def order_create(request):
+def orders_list(request):
+    context = {
+        "orders": Order.objects.all()
+    }
+    return render(request, 'orders.html', context)
 
+
+def order_create(request):
+    
     selected_item = request.POST.get('item-name')
     item = Item.objects.get(name = selected_item)
 
@@ -26,14 +33,7 @@ def order_create(request):
     order.user = request.user
     order.item = item
     order.save()
-
-    orders = Order.objects.all().order_by('-id')
-    
-    context = {
-        "orders": orders,
-        "item": item
-    }
-    return render(request, 'orders.html', context)
+    return redirect("orders-list")
 
 
 def user_login(request):
@@ -55,6 +55,12 @@ def user_login(request):
         "form":form
     }
     return render(request, 'login.html', context)
+
+
+
+def order_delete(request, order_id):
+    order = Order.objects.get(id=order_id).delete()
+    return redirect('orders-list')
 
 
 def logout_view(request):

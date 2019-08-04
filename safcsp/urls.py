@@ -22,7 +22,9 @@ from tea_boy import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('items/', views.items_list, name='items-list'),
-    path('orders/', views.order_create, name='order-create'),
+    path('orders/', views.orders_list, name='orders-list'),
+    path('orders/create', views.order_create, name='order-create'),
+    path('order/delete/<int:order_id>', views.order_delete, name='order-delete'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.logout_view, name='logout'),
 
