@@ -50,13 +50,15 @@
     <div class="row my-3">
 		{% for item in items %}
 			<div class="col-12 col-sm-6 col-md-6 col-lg-4">
-				<div class="card my-4">
+				<div class="card my-4 box">
 					<div class="card-body text-center">
 						{% if item.image %}
 							<div class="col-12">
 								<img src="{{item.image.url}}" alt="{{item.name}}">
 							</div>
-							<!-- <img src="{{item.image.url}}" alt="{{item.name}}> -->
+							<div class="col-12">
+								<h5 class="items-list">{{item.name}}</h5>
+							</div>
 						{% else %}
 							<div class="col-12">
 								<p><img src="{% static 'images/coffee.png' %}" alt="{{item.name}}"></p>
@@ -65,9 +67,6 @@
 								<h5 class="items-list">{{item.name}}</h5>
 							</div>
 						{% endif %}
-						<div class="col-12">
-							<h5 class="items-list">{{item.name}}</h5>
-						</div>
 						<hr>
 						<div class="col-12">
 							<div class="row">
@@ -75,7 +74,7 @@
 									<form action="{% url 'order-create' %}" method="POST">
 										{% csrf_token %}
 										<input type="text" name="item-name" value="{{item.name}}" hidden>
-										<!-- <button class="btn btn-light dropdown-toggle my-2" type="button" id="operations" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<button class="btn btn-light dropdown-toggle my-2" type="button" id="operations" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											كيف السكر
 										</button>
 										
@@ -83,7 +82,7 @@
 											<a class="dropdown-item" href="#">قليل</a>
 											<a class="dropdown-item" href="#">مزبوط</a>
 											<a class="dropdown-item" id="delete" href="">زيادة</a>
-										</div> -->
+										</div>
 										<label for="notes" style="color: lightgray" required>اكتب ملاحظاتك هنا</lable>
 										<textarea class="form-control mb-4 mt-2" id="notes" name="notes" placeholder="مثال: سكر قليل .."></textarea>
 										<input type="submit" class="btn btn-primary block" value="تأكيد الطلب" style="background-color: #20c997; border-color: #20c997">

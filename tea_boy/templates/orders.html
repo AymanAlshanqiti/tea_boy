@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     orders
@@ -7,7 +8,100 @@
 {% block content %}
 
 <a href="{% url 'items-list' %}" class="btn btn-info mb-4">Back to Menu</a>
-<ul class="list-group">
+
+{% comment %} {% if request.user.is_anonymous %} {% endcomment %}
+	<h1 class="text-center mt-4">الطلبات الحالية</h1>
+  	<div class="row justify-content-center">
+		<div class="col-11 col-md-11 px-4 box">
+			<table class="table text-center table-responsive">
+				<thead>
+					<tr>
+						<th scope="col">رقم الطلب</th>
+						<th scope="col">الطلب</th>
+            <th scope="col">الموظف</th>
+						<th scope="col">خيارات إضافية</th>
+            <th>حالة الطلب</th>
+						<th scope="col">إجراءات</th>
+					</tr>
+				</thead>
+				<tbody>
+        {% for order in orders %}
+					<tr>
+						<th scope="row">{{order.id}}</th>
+            <td>{{order.item.name}}</td>
+						<td>{{order.user.first_name}} {{order.user.last_name}}</td>
+            <td class="order-notes">{{order.notes}}</td>
+            <td>
+              <span class="badge mb-1" style="background-color: #6b5eae; color: white;">جديد</span>
+              <span class="badge mb-1" style="background-color: #fa5c7c; color: white;">منتهي</span>
+            </td>
+            <td>
+							<button class="btn btn-light dropdown-toggle" type="button" id="operations" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								إجراءات
+							</button>
+							<div class="dropdown-menu text-right" aria-labelledby="operations">
+								<a class="dropdown-item" href="#">طلب منتهي</a>
+								<a class="dropdown-item" id="delete" href="{% url 'order-delete' order.id %}">حذف</a>
+							</div>
+						</td>
+					</tr>
+        {% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+  {% comment %} {% endif %} {% endcomment %}
+    {% comment %} <div class="row my-3">
+		{% for order in orders %}
+			<div class="col-12 col-sm-6 col-md-6 col-lg-4">
+				<div class="card my-4">
+					<div class="card-body text-center">
+						{% if order.item.image %}
+              <div class="col-12">
+                <span class="badge badge-light" style="padding: 10px;">
+                    {{order.id}}
+                </span>
+                <span>
+                  {{order.user.first_name}}
+                </span>
+                <span>
+                    {{order.user.last_name}}
+                  </span>
+              </div>
+							<div class="col-12">
+								{% comment %} <img src="{{order.item.image.url}}" alt="{{order.item.name}}"> {% endcomment %}
+							{% comment %} </div>
+              <hr>
+							<div class="col-12">
+								<h5 class="items-list">{{order.item.name}}</h5>
+							</div>
+              <div>{{order.notes}}</div>
+              <span class="col-sm-12 mt-2 col-md-1"">
+                <a class="btn btn-danger btn-block" href="{% url 'order-delete' order.id %}">حذف</a>
+              </span>
+						{% else %}
+							<div class="col-12">
+								{% comment %} <p><img src="{% static 'images/coffee.png' %}" alt="{{order.item.name}}"></p> {% endcomment %}
+							{% comment %} </div>
+              <hr>
+							<div class="col-12">
+                <h5 class="items-list">{{order.item.name}}</h5>
+							</div>
+              <hr>
+              <div>{{order.notes}}</div>
+              <span class="col-sm-12 mt-2 col-md-1" style="float: right;">
+                <a class="btn btn-danger" href="{% url 'order-delete' order.id %}">حذف</a>
+              </span>
+						{% endif %}
+					</div>
+				</div>
+			</div> {% endcomment %}
+		{% comment %} {% endfor %}  {% endcomment %}
+	{% comment %} </div> {% endcomment %}
+	{% comment %} <br><br> {% endcomment %}
+
+{% comment %} {% endif %} {% endcomment %}
+{% comment %} <ul class="list-group">
 {% for order in orders %}
   <div class="row justify-content-center mt-3">
     <div class="col-11 col-md-12">
@@ -27,6 +121,6 @@
     </div>
   </div>
 {% endfor %}
-</ul>
+</ul> {% endcomment %}
 
 {% endblock content %}

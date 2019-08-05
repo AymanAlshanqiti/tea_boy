@@ -34,8 +34,54 @@ body {
   background-color: var(--light-gray);
 }
 
+.card {
+    border: none;
+}
+
+.badge {
+    padding: 10px;
+}
+
 #login-page {
     margin-left: 30%;
+}
+
+.dropdown-menu .dropdown-item {
+    color: var(--secondary);
+}
+
+.dropdown-menu #delete {
+    color: var(--red);
+}
+
+.col-11{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.table {
+    margin-bottom: -20px;
+    display: flex;
+    justify-content: center;
+    border: var(--gray-border);
+    border-radius: .5rem;
+    margin-bottom: 4px;
+}
+
+.table-responsive {
+    display: block;
+}
+
+.order-notes {
+    color: var(--gray);
+}
+
+thead th {
+    color: var(--safcsp-blue);
+}
+
+tbody, thead {
+    border: var(--safcsp-dark);
 }
 
 .box {
