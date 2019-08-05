@@ -32,6 +32,7 @@ def order_create(request):
     order = Order()
     order.user = request.user
     order.item = item
+    order.notes = request.POST.get('notes')
     order.save()
     return redirect("orders-list")
 
